@@ -1,0 +1,5 @@
+<%= form_for room, data: { turbo: false } do |form| %>
+  <div class="actions" data: { turbo: false }>
+    <%= form.submit 'Create Room', class: 'btn btn-primary' %>
+  </div>
+<% end %>
