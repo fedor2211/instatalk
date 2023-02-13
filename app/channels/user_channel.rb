@@ -2,7 +2,7 @@ class UserChannel < ApplicationCable::Channel
   def subscribed
     current_user.set_online!
     logger.info("user #{current_user.id} is online")
-    stream_from 'global_online_users'
+    stream_from 'instatalk_online_users'
     OnlineUsersService.call
   end
 

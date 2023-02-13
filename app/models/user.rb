@@ -1,20 +1,15 @@
+require 'user_cache'
+
 class User < ApplicationRecord
+  include UserCache
   before_create :generate_nickname
-  scope :online, -> { where(online: true) }
-
-  def set_online!
-    self.online = true
-    save!
-  end
-
-  def set_offline!
-    self.online = false
-    save!
-  end
 
   private
 
   def generate_nickname
-    self.nickname = Faker::Name.first_name.downcase
+    loop do
+      self.nickname = Faker::Name.first_name.downcase
+      break unless User.where(nickname: self.nickname).exists?
+    end
   end
 end

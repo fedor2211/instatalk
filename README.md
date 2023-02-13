@@ -7,6 +7,7 @@ Simple web chatting app
 2. Ruby on Rails 7
 3. bundler
 4. Postgresql
+5. Redis
 
 ## Setup
 1. Create `.env` files for your environment (`.env.development`, `.env.test` etc.) and fill them with information:

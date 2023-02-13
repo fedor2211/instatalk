@@ -7,7 +7,7 @@ class OnlineUsersService < ApplicationService
 
   def broadcast_online_users
     ActionCable.server.broadcast(
-      'global_online_users',
+      'instatalk_online_users',
       { users: render_online_users }
     )
   end
