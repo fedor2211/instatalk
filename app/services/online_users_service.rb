@@ -10,7 +10,6 @@ class OnlineUsersService < ApplicationService
       'instatalk_online_users',
       { users: render_online_users }
     )
-    logger.info("broadcast online users to '#{current_user.nickname}'")
   end
 
   def render_online_users
