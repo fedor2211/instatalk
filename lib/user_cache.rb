@@ -7,15 +7,15 @@ module UserCache
 
   module ClassMethods
     def online
-      Rails.cache.redis.smembers(ONLINE_USERS_STORAGE)
+      ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers(ONLINE_USERS_STORAGE)
     end
   end
 
   def set_online!
-    Rails.cache.redis.sadd?(ONLINE_USERS_STORAGE, self.nickname)
+    ActionCable.server.pubsub.redis_connection_for_subscriptions.sadd?(ONLINE_USERS_STORAGE, self.nickname)
   end
 
   def set_offline!
-    Rails.cache.redis.srem?(ONLINE_USERS_STORAGE, self.nickname)
+    ActionCable.server.pubsub.redis_connection_for_subscriptions.srem?(ONLINE_USERS_STORAGE, self.nickname)
   end
 end
