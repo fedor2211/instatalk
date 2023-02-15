@@ -1,5 +1,5 @@
 class UsersOnlineService < ApplicationService
-  REDIS_CONN_FOR_SUBS = ActionCable.server.pubsub.redis_connection_for_subscriptions
+  REDIS_CONN_FOR_SUBS = ApplicationCable::Channel::REDIS_CONN_FOR_SUBS
   REDIS_USERS_CONNS_HASH = 'instatalk_users_connections'.freeze
   STREAM_NAME = 'instatalk_online_users'.freeze
 
