@@ -24,7 +24,7 @@ class MessageService < ApplicationService
   end
 
   def render_message
-    ApplicationController.renderer.render(
+    ApplicationController.render(
       partial: 'messages/message',
       locals: { message: @message }
     )

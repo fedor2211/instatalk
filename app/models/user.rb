@@ -1,7 +1,4 @@
-require 'user_cache'
-
 class User < ApplicationRecord
-  include UserCache
   before_create :generate_nickname
 
   private
