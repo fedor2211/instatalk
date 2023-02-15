@@ -4,16 +4,19 @@ class UsersOnlineService < ApplicationService
   STREAM_NAME = 'instatalk_online_users'.freeze
 
   def call
+    Rails.logger.info("executing online users service")
     broadcast_online_users
   end
 
   private
 
   def broadcast_online_users
+    online_users = render_online_users
     ActionCable.server.broadcast(
       STREAM_NAME,
-      { users: render_online_users }
+      { users: online_users }
     )
+    Rails.logger.info("broadcasting online users list #{online_users}")
   end
 
   def render_online_users
