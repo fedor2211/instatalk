@@ -22,7 +22,7 @@ document.addEventListener("turbo:load", () => {
         },
         received(data) {
           console.log(`Received message ${data["message"]}`)
-          messagesNode.insertAdjacentHTML("beforeend", data["message"])
+          this.addNewMessage(data["message"])
         },
         rejected() {
           console.error("subscription rejected by server")
@@ -38,6 +38,30 @@ document.addEventListener("turbo:load", () => {
             }
           })
         },
+        addNewMessage(messageData) {
+          let newMessageNode = document.createElement("div")
+          newMessageNode.classList.add("row", "message", "mt-1")
+
+          let nicknameNode = document.createElement("div")
+          nicknameNode.classList.add("col-2", "font-weight-bold", "text-info")
+          nicknameNode.innerText = messageData["nickname"]
+
+          let contentNode = document.createElement("div")
+          contentNode.classList.add("col-10")
+
+          let createdAtNode = document.createElement("div")
+          createdAtNode.classList.add("float-right", "small", "badge", "badge-light")
+          createdAtNode.innerText = messageData["created_at"]
+
+          let messageBodyNode = document.createElement("div")
+          messageBodyNode.innerText = messageData["body"]
+
+          contentNode.appendChild(createdAtNode)
+          contentNode.appendChild(messageBodyNode)
+          newMessageNode.appendChild(nicknameNode)
+          newMessageNode.appendChild(contentNode)
+          messagesNode.appendChild(newMessageNode)
+        }
       }
     )
   }

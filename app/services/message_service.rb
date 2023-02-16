@@ -19,14 +19,13 @@ class MessageService < ApplicationService
   def broadcast_message
     ActionCable.server.broadcast(
       "room_channel_#{@room.id}",
-      { message: render_message }
-    )
-  end
-
-  def render_message
-    ApplicationController.render(
-      partial: 'messages/message',
-      locals: { message: @message }
+      {
+        message: {
+          body: @message.body,
+          nickname: @message.user.nickname,
+          created_at: @message.created_at
+        }
+      }
     )
   end
 end

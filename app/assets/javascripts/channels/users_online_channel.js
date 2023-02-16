@@ -16,15 +16,19 @@ document.addEventListener("turbo:load", () => {
         console.log("disconnected from online users stream")
       },
       received(data) {
-        let usersOnlineNode = document.getElementById("users-online")
-        if (usersOnlineNode) {
-          usersOnlineNode.innerHTML = ""
-          usersOnlineNode.insertAdjacentHTML("beforeend", data["users"])
-        }
+        this.addOnlineUsersList(data["users"])
       },
       rejected() {
         console.error("subscription rejected by server")
       },
+      addOnlineUsersList(usersList) {
+        let usersOnlineNode = document.getElementById("users-online")
+        if (usersOnlineNode) {
+          let usersOnlineListNode = document.createElement("span")
+          usersOnlineListNode.textContent = usersList.join(", ")
+          usersOnlineNode.appendChild(usersOnlineListNode)
+        }
+      }
     }
   )
 })
