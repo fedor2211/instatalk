@@ -24,9 +24,7 @@ document.addEventListener("turbo:load", () => {
       addOnlineUsersList(usersList) {
         let usersOnlineNode = document.getElementById("users-online")
         if (usersOnlineNode) {
-          let usersOnlineListNode = document.createElement("span")
-          usersOnlineListNode.textContent = usersList.join(", ")
-          usersOnlineNode.appendChild(usersOnlineListNode)
+          usersOnlineNode.textContent = usersList.join(", ")
         }
       }
     }
